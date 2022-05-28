@@ -15,6 +15,7 @@ app.use(json())
 app.use(urlencoded({ extended: false }))
 
 app.use('/api/goals', require('./routes/goalsRoutes'))
+app.use('/api/users', require('./routes/userRoutes'))
 
 app.use(errorHandler)
 

@@ -11,3 +11,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: .8rem;
+  border-bottom: 2px solid #555;
+}
+
+.header ul {
+  display: flex;
+  list-style-type: none;
+}
+
+.header ul li {
+  margin: 0 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: #111;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 1rem;
+}
+
+input {
+  padding: .4rem;
+}
+
+input[type='submit'] {
+  background-color: #333;
+  color: #fff;
+}

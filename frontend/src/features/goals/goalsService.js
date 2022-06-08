@@ -2,11 +2,16 @@ import axios from "axios";
 
 const API_URL = '/api/goals/'
 
-const getGoals = async (userId) => {
-    const response = await axios.get(API_URL, userId)
+const getGoals = async (token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
 
-    console.log(response);
+    const response = await axios.get(API_URL, config)
 
+    return response.data
 }
 
 const createGoal = async (goal, token) => {

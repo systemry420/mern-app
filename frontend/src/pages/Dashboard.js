@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createGoal } from "../features/goals/goalsSlice";
+import { createGoal, getGoals, reset } from "../features/goals/goalsSlice";
 
 const Dashboard = () => {
   const [text, setText] = useState('');
 
   const navigate = useNavigate()
   const { user } = useSelector(state => state.auth)
-  const { message } = useSelector(state => state.goals)
+  const { message, goals } = useSelector(state => state.goals)
 
   const dispatch = useDispatch()
 
@@ -17,9 +17,12 @@ const Dashboard = () => {
       navigate('/login')
     }
 
-    console.log(message);
+    console.log(goals);
+
+    dispatch(getGoals())
     
     return () => {
+      dispatch(reset())
     };
   }, [user, navigate, message]);
 
@@ -37,6 +40,11 @@ const Dashboard = () => {
           <input placeholder="Enter your goal" type='text' value={text} onChange={(e) => setText(e.target.value)} />
           <input type={'submit'} value='Set goal' />
         </form>
+        <ul>
+          {goals.map(goal => (
+            <li>{goal.text}</li>
+          ))}
+        </ul>
       </div>
     )
   }

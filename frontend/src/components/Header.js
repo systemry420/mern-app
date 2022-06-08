@@ -1,13 +1,17 @@
 import { FaUser, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
+
+    const { user } = useSelector(state => state.auth)
+
   return (
     <header className='header'>
         <div className='logo'>
             <Link to={'/'}>GoalSetter</Link>
         </div>
-        <ul>
+        {!user && <ul>
             <li>
                 <Link to={'/login'}>
                     <FaSignInAlt /> Login
@@ -19,6 +23,7 @@ const Header = () => {
                 </Link>
             </li>
         </ul>
+        }
     </header>
   )
 }

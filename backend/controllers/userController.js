@@ -26,6 +26,8 @@ const registerUser = asyncHandler(async (req, res) => {
         name, email, password: hashedPassword
     })
 
+    console.log(user);
+
     if (user) {
         res.json({
             _id: user.id,
@@ -58,12 +60,7 @@ const login = asyncHandler(async (req, res) => {
 })
 
 const getUser = asyncHandler(async (req, res) => {
-    const { _id, name, email } = await User.findById(req.user.id)
-
-    res.json({
-        id: _id,
-        name, email
-    })
+    res.json(req.user)
 })
 
 const generateJWT = id => {

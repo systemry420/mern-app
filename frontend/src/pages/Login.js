@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../features/auth/authSlice';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +10,20 @@ const Login = () => {
   });
 
   const { email, password } = formData
+
+  const { user, message } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+  const navigate= useNavigate()
+
+  useEffect(() => {
+
+    if(user) {
+      navigate('/dashboard')
+    }
+    
+    return () => {
+    };
+  }, [user, message]);
   
   const onChange = (e) => {
       setFormData(prevState => {
@@ -19,6 +36,9 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
+
+    dispatch(login(formData))
+
   }
   
   return (
